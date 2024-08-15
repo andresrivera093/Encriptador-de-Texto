@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador de Texto</title>
+    <style>
+        /* Estilos generales para pantallas grandes (escritorio) */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #084e99;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            max-width: 1200px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #084e99;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #084e99;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border-radius: 12px; /* Borde redondeado */
+            animation: blink 1.5s infinite; /* Animación de titileo */
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #084e99;
+            font-size: 16px;
+            resize: none;
+        }
+
+        .recuadro-imagen {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            height: 200px;
+            background-color: #ffffff;
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 30%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+        /* Media Query para tablets (pantallas entre 768px y 1024px) */
+        @media (max-width: 1024px) {
+            .row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .recuadro-imagen {
+                flex-direction: column;
+                height: auto;
+            }
+
+            img {
+                max-width: 70%;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Media Query para celulares (pantallas de 767px o menos) */
+        @media (max-width: 767px) {
+            .row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .recuadro-imagen {
+                flex-direction: column;
+                height: auto;
+            }
+
+            img {
+                max-width: 90%;
+                margin-bottom: 10px;
+            }
+
+            button, textarea {
+                width: 90%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Encriptador de Texto</h1>
+        <div class="row">
+            <button onclick="encriptar()">Encriptar</button>
+            <button onclick="desencriptar()">Desencriptar</button>
+        </div>
+        <textarea id="input-text" placeholder="Escribe el texto aquí..."></textarea>
+        <textarea id="output-text" placeholder="El texto encriptado aparecerá aquí..."></textarea>
+        <button onclick="copiarTexto()">Copiar Texto Encriptado</button>
+        <div class="recuadro-imagen">
+            <img src="Captura de pantalla 2024-08-13 224719.png" alt="Modelo del figma">
+            <img src="Captura de pantalla 2024-08-13 223802.png" alt="Logo Alura Latam Next Education">
+            <img src="1.png" alt="Logo personal">
+        </div>
+    </div>
+    <script>
+        function encriptar() {
+            const inputText = document.getElementById('input-text').value;
+            let encryptedText = inputText.replace(/e/g, "enter")
+                                         .replace(/i/g, "imes")
+                                         .replace(/a/g, "ai")
+                                         .replace(/o/g, "ober")
+                                         .replace(/u/g, "ufat");
+            document.getElementById('output-text').value = encryptedText;
+        }
+
+        function desencriptar() {
+            const inputText = document.getElementById('output-text').value;
+            let decryptedText = inputText.replace(/enter/g, "e")
+                                         .replace(/imes/g, "i")
+                                         .replace(/ai/g, "a")
+                                         .replace(/ober/g, "o")
+                                         .replace(/ufat/g, "u");
+            document.getElementById('input-text').value = decryptedText;
+        }
+
+        function copiarTexto() {
+            const outputText = document.getElementById('output-text');
+            outputText.select();
+            outputText.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand("copy");
+            alert("Texto encriptado copiado al portapapeles");
+        }
+    </script>
+</body>
+</html>
+
